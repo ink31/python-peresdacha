@@ -1,0 +1,19 @@
+running = True
+n = 0
+import random
+print("ЧЕГО СКАЗАТЬ-ТО ХОТЕЛ, МИЛОК?!");
+while running:
+    word = input()
+    if word == "ПОКА!":
+      num = random.randint(1930, 1950);
+      n += 1;
+      if n<3:
+        print(f'НЕТ, НИ РАЗУ С {num} ГОДА!')
+      else:
+        print('ДО СВИДАНИЯ, МИЛЫЙ!');
+        running = False;
+    elif word == word.upper():
+      num = random.randint(1930, 1950);
+      print(f'НЕТ, НИ РАЗУ С {num} ГОДА!')
+    else:
+        print('АСЬ?! ГОВОРИ ГРОМЧЕ, ВНУЧЕК!')
