@@ -1,0 +1,110 @@
+class User:
+    count = 0
+
+    def init(self, name, login, password, grade):
+        self._name = name
+        self._login = login
+        self._password = password
+        self._grade = grade
+        User.count += 1
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+
+    @property
+    def login(self):
+        return self._login
+
+    @login.setter
+    def login(self, value):
+        print("Невозможно изменить логин!")
+
+    @property
+    def password(self):
+        return "********"
+
+    @password.setter
+    def password(self, value):
+        self._password = value
+
+    @property
+    def grade(self):
+        return "Неизвестное свойство grade"
+
+    @grade.setter
+    def grade(self, value):
+        print("Неизвестное свойство grade")
+
+    def show_info(self):
+        print("Name: {}, Login: {}".format(self.name, self.login))
+
+    def eq(self, other):
+        return self._grade == other._grade
+
+    def lt(self, other):
+        return self._grade < other._grade
+
+    def gt(self, other):
+        return self._grade > other._grade
+
+
+class SuperUser(User):
+    count = 0
+
+    def init(self, name, login, password, role, grade):
+        # Инициализируем вручную, чтобы не дергать конструктор User
+        # и не ломать счетчик обычных пользователей
+        self._name = name
+        self._login = login
+        self._password = password
+        self._grade = grade
+        self._role = role
+        SuperUser.count += 1
+
+    @property
+    def role(self):
+        return self._role
+
+    @role.setter
+    def role(self, value):
+        self._role = value
+
+    def show_info(self):
+        print("Name: {}, Login: {}, Role: {}".format(self.name, self.login, self.role))
+
+# --- Проверка работы (Код из задания) ---
+user1 = User('Paul McCartney', 'paul', '1234', 3)
+user2 = User('George Harrison', 'george', '5678', 2)
+user3 = User('Richard Starkey', 'ringo', '8523', 3)
+admin = SuperUser('John Lennon', 'john', '0000', 'admin', 5)
+
+print("--- Тест вывода ---")
+user1.show_info()
+admin.show_info()
+
+print("\n--- Тест счетчиков ---")
+users = User.count
+admins = SuperUser.count
+print('Всего обычных пользователей: {}'.format(users))
+print('Всего супер-пользователей: {}'.format(admins))
+
+print("\n--- Тест сравнения ---")
+print(user1 < user2)
+print(admin > user3)
+print(user1 == user3)
+
+print("\n--- Тест свойств ---")
+user3.name = 'Ringo Starr'
+user1.password = 'Pa$$w0rd'
+print(user3.name)
+print(user2.password)
+print(user2.login)
+
+user2.login = 'geo'
+print(user1.grade)
+admin.grade = 10
