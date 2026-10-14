@@ -1,0 +1,5 @@
+def filtered_books(books, search_term):
+    is_match = lambda b: search_term.lower() in b[1].lower()
+    reformat = lambda b: [b[0], f"{b[1]}, {b[2]}", b[3], b[4]]
+    
+    return list(map(reformat, filter(is_match, books)))
